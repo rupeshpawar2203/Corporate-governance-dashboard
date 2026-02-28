@@ -1,337 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Velox — Admin Dashboard</title>
-
-  <!-- Google Fonts: Sora (display) + DM Sans (body) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
-
-  <!-- Chart.js CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-
-  <!-- Dashboard Styles -->
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Exec Comp & Financial Performance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
-  <!-- ═══════════════════════════════════════════
-       SIDEBAR NAVIGATION
-  ═══════════════════════════════════════════ -->
-  <aside class="sidebar" id="sidebar">
+  <!-- BG grid -->
+  <div class="bg-grid"></div>
+  <div class="bg-glow"></div>
 
-    <!-- Logo -->
-    <div class="sidebar-logo">
-      <span class="logo-icon">V</span>
-      <span class="logo-text">Velox</span>
-    </div>
+  <div class="wrapper">
 
-    <!-- Navigation Links -->
-    <nav class="sidebar-nav">
-      <span class="nav-section-label">Main</span>
-
-      <a href="#" class="nav-item active" data-page="dashboard">
-        <span class="nav-icon">
-          <!-- Dashboard icon -->
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-        </span>
-        <span class="nav-label">Dashboard</span>
-        <span class="nav-badge">New</span>
-      </a>
-
-      <a href="#" class="nav-item" data-page="analytics">
-        <span class="nav-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-        </span>
-        <span class="nav-label">Analytics</span>
-      </a>
-
-      <a href="#" class="nav-item" data-page="orders">
-        <span class="nav-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-        </span>
-        <span class="nav-label">Orders</span>
-      </a>
-
-      <a href="#" class="nav-item" data-page="customers">
-        <span class="nav-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-        </span>
-        <span class="nav-label">Customers</span>
-      </a>
-
-      <a href="#" class="nav-item" data-page="products">
-        <span class="nav-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
-        </span>
-        <span class="nav-label">Products</span>
-      </a>
-
-      <span class="nav-section-label" style="margin-top:20px">Settings</span>
-
-      <a href="#" class="nav-item" data-page="settings">
-        <span class="nav-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
-        </span>
-        <span class="nav-label">Settings</span>
-      </a>
-
-      <a href="#" class="nav-item" data-page="help">
-        <span class="nav-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-        </span>
-        <span class="nav-label">Help</span>
-      </a>
-    </nav>
-
-    <!-- Sidebar User Profile -->
-    <div class="sidebar-profile">
-      <div class="profile-avatar">AK</div>
-      <div class="profile-info">
-        <span class="profile-name">Alex Kim</span>
-        <span class="profile-role">Super Admin</span>
-      </div>
-      <button class="profile-logout" title="Log out">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-      </button>
-    </div>
-
-  </aside>
-
-  <!-- Sidebar overlay for mobile -->
-  <div class="sidebar-overlay" id="sidebarOverlay"></div>
-
-  <!-- ═══════════════════════════════════════════
-       MAIN CONTENT AREA
-  ═══════════════════════════════════════════ -->
-  <main class="main-content" id="mainContent">
-
-    <!-- ── TOP HEADER ─────────────────────────── -->
-    <header class="top-header">
-
-      <!-- Mobile hamburger -->
-      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-        <span></span><span></span><span></span>
-      </button>
-
-      <!-- Page title -->
-      <div class="header-title">
-        <h1 id="pageTitle">Dashboard</h1>
-        <span class="header-breadcrumb">Home / <strong>Overview</strong></span>
-      </div>
-
-      <!-- Header right actions -->
-      <div class="header-actions">
-
-        <!-- Search -->
-        <div class="header-search">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" placeholder="Search anything…" />
+    <!-- ══ HEADER ══ -->
+    <header class="header">
+      <div class="header-left">
+        <div class="logo">⚡</div>
+        <div>
+          <h1 class="title">EXEC COMP &amp; FINANCIAL PERFORMANCE</h1>
+          <p class="subtitle">CORPORATE GOVERNANCE INTELLIGENCE · FY 2019 – 2023 · BIG TECH</p>
         </div>
-
-        <!-- Notification bell -->
-        <button class="header-icon-btn" id="notifBtn" title="Notifications">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
-          <span class="notif-dot"></span>
-        </button>
-
-        <!-- Date pill -->
-        <div class="header-date" id="headerDate"></div>
-
-        <!-- Avatar -->
-        <div class="header-avatar">AK</div>
+      </div>
+      <div class="filters" id="filters">
+        <div class="filter-group">
+          <span class="filter-label">COMPANY</span>
+          <select id="filterTicker" class="sel">
+            <option value="All">All Companies</option>
+            <option value="AAPL">AAPL</option>
+            <option value="MSFT">MSFT</option>
+            <option value="GOOGL">GOOGL</option>
+            <option value="META">META</option>
+            <option value="AMZN">AMZN</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">FROM</span>
+          <select id="filterFrom" class="sel">
+            <option>2019</option><option>2020</option><option>2021</option>
+            <option>2022</option><option>2023</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">TO</span>
+          <select id="filterTo" class="sel">
+            <option>2019</option><option>2020</option><option>2021</option>
+            <option>2022</option><option selected>2023</option>
+          </select>
+        </div>
+        <button id="resetBtn" class="btn-reset">Reset</button>
       </div>
     </header>
 
-    <!-- ── PAGE CONTENT ─────────────────────────── -->
-    <div class="page-content">
+    <!-- active filter badge -->
+    <div id="filterBadge" class="filter-badge hidden">
+      <span class="badge-label">ACTIVE FILTERS:</span>
+      <span id="badgeContent"></span>
+    </div>
 
-      <!-- Welcome banner -->
-      <div class="welcome-banner">
-        <div class="welcome-text">
-          <h2>Good morning, Alex 👋</h2>
-          <p>Here's what's happening with your business today.</p>
+    <!-- ══ KPI ROW ══ -->
+    <div class="kpi-row">
+      <div class="kpi-card" data-accent="#38BDF8">
+        <div class="kpi-icon">👤</div>
+        <div class="kpi-label">AVG CEO-TO-WORKER PAY RATIO</div>
+        <div class="kpi-value" id="kpiRatio">—</div>
+        <div class="kpi-sub">CEO Comp ÷ Median Employee Pay</div>
+        <div class="kpi-bar" style="background:linear-gradient(90deg,#38BDF8,#38BDF800)"></div>
+        <div class="kpi-blob" style="background:#38BDF811"></div>
+      </div>
+      <div class="kpi-card" data-accent="#34D399">
+        <div class="kpi-icon">📈</div>
+        <div class="kpi-label">AVERAGE RETURN ON EQUITY</div>
+        <div class="kpi-value" id="kpiRoe">—</div>
+        <div class="kpi-sub">Across selected period</div>
+        <div class="kpi-bar" style="background:linear-gradient(90deg,#34D399,#34D39900)"></div>
+        <div class="kpi-blob" style="background:#34D39911"></div>
+      </div>
+      <div class="kpi-card" data-accent="#FBBF24">
+        <div class="kpi-icon">💰</div>
+        <div class="kpi-label">CEO COMP · LATEST YEAR</div>
+        <div class="kpi-value" id="kpiComp">—</div>
+        <div class="kpi-sub">Most recent year selected</div>
+        <div class="kpi-bar" style="background:linear-gradient(90deg,#FBBF24,#FBBF2400)"></div>
+        <div class="kpi-blob" style="background:#FBBF2411"></div>
+      </div>
+      <div class="kpi-card" data-accent="#A78BFA">
+        <div class="kpi-icon">🏦</div>
+        <div class="kpi-label">TOTAL REVENUE · LATEST YEAR</div>
+        <div class="kpi-value" id="kpiRev">—</div>
+        <div class="kpi-sub">Aggregate across companies</div>
+        <div class="kpi-bar" style="background:linear-gradient(90deg,#A78BFA,#A78BFA00)"></div>
+        <div class="kpi-blob" style="background:#A78BFA11"></div>
+      </div>
+    </div>
+
+    <!-- ══ CHARTS GRID ══ -->
+    <div class="charts-grid">
+
+      <!-- Chart 1: Revenue Overview -->
+      <div class="chart-card">
+        <div class="chart-badge">REVENUE OVERVIEW</div>
+        <div class="chart-title">Total Revenue vs. Net Income</div>
+        <div class="chart-subtitle">Aggregate financials across selected companies &amp; period</div>
+        <div class="chart-wrap"><canvas id="chartRevenue"></canvas></div>
+        <div class="legend-row">
+          <div class="leg-item"><div class="leg-swatch" style="background:#6366F1"></div><span>Total Revenue</span></div>
+          <div class="leg-item"><div class="leg-line" style="background:#34D399"></div><span>Net Income</span></div>
         </div>
-        <button class="btn-primary">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          New Report
-        </button>
       </div>
 
-      <!-- ── STAT CARDS ───────────────────────── -->
-      <div class="stats-grid">
-
-        <!-- Revenue Card -->
-        <div class="stat-card" style="--card-accent: #4F46E5;">
-          <div class="stat-header">
-            <span class="stat-label">Total Revenue</span>
-            <div class="stat-icon" style="background: rgba(79,70,229,0.12); color:#4F46E5;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
-            </div>
-          </div>
-          <div class="stat-value" data-target="284750">$0</div>
-          <div class="stat-footer">
-            <span class="stat-change positive">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="18 15 12 9 6 15"/></svg>
-              +12.5%
-            </span>
-            <span class="stat-period">vs last month</span>
-          </div>
-          <div class="stat-sparkline"><canvas id="sparkRevenue"></canvas></div>
+      <!-- Chart 2: Compensation Growth -->
+      <div class="chart-card">
+        <div class="chart-badge">COMPENSATION GROWTH</div>
+        <div class="chart-title">CEO Pay Mix Over Time</div>
+        <div class="chart-subtitle">Base salary, cash bonus &amp; stock awards by fiscal year</div>
+        <div class="chart-wrap"><canvas id="chartComp"></canvas></div>
+        <div class="legend-row">
+          <div class="leg-item"><div class="leg-swatch" style="background:#38BDF8"></div><span>Stock Awards</span></div>
+          <div class="leg-item"><div class="leg-swatch" style="background:#FBBF24"></div><span>Cash Bonus</span></div>
+          <div class="leg-item"><div class="leg-swatch" style="background:#334155"></div><span>Base Salary</span></div>
         </div>
+      </div>
 
-        <!-- Users Card -->
-        <div class="stat-card" style="--card-accent: #0EA5E9;">
-          <div class="stat-header">
-            <span class="stat-label">Active Users</span>
-            <div class="stat-icon" style="background: rgba(14,165,233,0.12); color:#0EA5E9;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-            </div>
-          </div>
-          <div class="stat-value" data-target="48392">0</div>
-          <div class="stat-footer">
-            <span class="stat-change positive">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="18 15 12 9 6 15"/></svg>
-              +8.1%
-            </span>
-            <span class="stat-period">vs last month</span>
-          </div>
-          <div class="stat-sparkline"><canvas id="sparkUsers"></canvas></div>
-        </div>
+      <!-- Chart 3: Pay by Company -->
+      <div class="chart-card chart-card--full">
+        <div class="chart-badge">PAY BY COMPANY</div>
+        <div class="chart-title">Compensation vs. Return on Equity</div>
+        <div class="chart-subtitle">Toggle companies below · hover points for detail</div>
+        <div class="chart-wrap"><canvas id="chartScatter"></canvas></div>
+        <div class="scatter-pills" id="scatterPills"></div>
+      </div>
 
-        <!-- Orders Card -->
-        <div class="stat-card" style="--card-accent: #10B981;">
-          <div class="stat-header">
-            <span class="stat-label">Total Orders</span>
-            <div class="stat-icon" style="background: rgba(16,185,129,0.12); color:#10B981;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-            </div>
-          </div>
-          <div class="stat-value" data-target="12840">0</div>
-          <div class="stat-footer">
-            <span class="stat-change positive">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="18 15 12 9 6 15"/></svg>
-              +5.3%
-            </span>
-            <span class="stat-period">vs last month</span>
-          </div>
-          <div class="stat-sparkline"><canvas id="sparkOrders"></canvas></div>
-        </div>
+    </div>
 
-        <!-- Growth Card -->
-        <div class="stat-card" style="--card-accent: #F59E0B;">
-          <div class="stat-header">
-            <span class="stat-label">Growth Rate</span>
-            <div class="stat-icon" style="background: rgba(245,158,11,0.12); color:#F59E0B;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-            </div>
-          </div>
-          <div class="stat-value" data-target="24.8" data-suffix="%">0%</div>
-          <div class="stat-footer">
-            <span class="stat-change negative">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="6 9 12 15 18 9"/></svg>
-              -2.4%
-            </span>
-            <span class="stat-period">vs last month</span>
-          </div>
-          <div class="stat-sparkline"><canvas id="sparkGrowth"></canvas></div>
-        </div>
+    <!-- ══ COMPANY SNAPSHOTS ══ -->
+    <div class="snapshot-grid" id="snapshotGrid"></div>
 
-      </div><!-- /stats-grid -->
+    <!-- ══ FOOTER ══ -->
+    <footer class="footer">
+      <span>DATA SOURCE: SEC DEF 14A PROXY STATEMENTS · ANNUAL REPORTS · FY 2019–2023</span>
+      <span>EXEC COMP INTELLIGENCE DASHBOARD · v3.0</span>
+    </footer>
 
-      <!-- ── CHARTS ROW ──────────────────────── -->
-      <div class="charts-row">
+  </div><!-- /wrapper -->
 
-        <!-- Revenue Area Chart -->
-        <div class="chart-card chart-large">
-          <div class="chart-card-header">
-            <div>
-              <h3 class="chart-title">Revenue Overview</h3>
-              <p class="chart-subtitle">Monthly revenue & expenses — 2024</p>
-            </div>
-            <div class="chart-tabs">
-              <button class="chart-tab active" data-range="6m">6M</button>
-              <button class="chart-tab" data-range="12m">12M</button>
-              <button class="chart-tab" data-range="ytd">YTD</button>
-            </div>
-          </div>
-          <div class="chart-wrap">
-            <canvas id="revenueChart"></canvas>
-          </div>
-        </div>
-
-        <!-- Traffic Donut Chart -->
-        <div class="chart-card chart-small">
-          <div class="chart-card-header">
-            <div>
-              <h3 class="chart-title">Traffic Sources</h3>
-              <p class="chart-subtitle">Acquisition channels</p>
-            </div>
-          </div>
-          <div class="chart-wrap chart-donut-wrap">
-            <canvas id="trafficChart"></canvas>
-          </div>
-          <!-- Legend -->
-          <div class="donut-legend" id="donutLegend"></div>
-        </div>
-
-      </div><!-- /charts-row -->
-
-      <!-- ── BOTTOM ROW: Table + Activity ──────────── -->
-      <div class="bottom-row">
-
-        <!-- Recent Orders Table -->
-        <div class="table-card">
-          <div class="table-card-header">
-            <div>
-              <h3 class="chart-title">Recent Orders</h3>
-              <p class="chart-subtitle">Last 8 transactions</p>
-            </div>
-            <button class="btn-secondary">View All</button>
-          </div>
-
-          <div class="table-responsive">
-            <table class="data-table" id="ordersTable">
-              <thead>
-                <tr>
-                  <th>Order ID</th>
-                  <th>Customer</th>
-                  <th>Product</th>
-                  <th>Amount</th>
-                  <th>Status</th>
-                  <th>Date</th>
-                </tr>
-              </thead>
-              <tbody>
-                <!-- Populated via JS -->
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- Recent Activity Feed -->
-        <div class="activity-card">
-          <div class="table-card-header">
-            <div>
-              <h3 class="chart-title">Activity Feed</h3>
-              <p class="chart-subtitle">Real-time events</p>
-            </div>
-            <span class="live-dot-label"><span class="live-dot"></span> Live</span>
-          </div>
-          <ul class="activity-list" id="activityList">
-            <!-- Populated via JS -->
-          </ul>
-        </div>
-
-      </div><!-- /bottom-row -->
-
-    </div><!-- /page-content -->
-  </main>
-
-  <!-- Dashboard Script -->
   <script src="script.js"></script>
 </body>
 </html>
