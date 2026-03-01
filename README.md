@@ -1,5 +1,3 @@
-# Claude-Generated-Dashboard
-
 # Corporate Governance & Financial Performance Dashboard 📊
 
 **Live Interactive Demo:** https://rupeshpawar2203.github.io/Claude-Generated-Dashboard/
@@ -23,8 +21,3 @@ The dashboard is designed to quickly spot "Governance Red Flags"—scenarios whe
 * **UI/UX Generation:** Claude 3.5 Sonnet (AI)
 * **Front-End:** React.js, Recharts, Tailwind CSS
 * **Deployment:** GitHub Pages
-
-## How to Run Locally
-1. Clone the repository: `git clone [Insert your repo link here]`
-2. Install dependencies: `npm install`
-3. Start the local server: `npm start`
