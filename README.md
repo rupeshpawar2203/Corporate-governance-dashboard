@@ -1,6 +1,6 @@
 # Corporate Governance & Financial Performance Dashboard 📊
 
-**Live Interactive Demo:** https://rupeshpawar2203.github.io/Claude-Generated-Dashboard/
+**Live Interactive Demo:** https://rupeshpawar2203.github.io/Corporate-governance-dashboard/
 
 ## Project Overview
 This project is an exploration into rapid dashboard prototyping using AI. The goal was to visualize the correlation between Executive Compensation (Corporate Governance) and fundamental financial performance (Net Income, ROE) for top US tech companies over a 5-year period.
